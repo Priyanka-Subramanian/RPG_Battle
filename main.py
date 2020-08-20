@@ -13,7 +13,7 @@ quake = Spell("Quake", 14, 140, "black")
 cure = Spell("Cure", 12, 120, "White")
 cura = Spell("Cura", 18, 200, "White")
 
-#Initiate people
+# Initiate people
 player = Person(460, 65, 60, 34, [fire, thunder, blizzard, meteor, quake, cure, cura])
 enemy = Person(1200, 65, 45, 25, [])
 
@@ -36,6 +36,7 @@ while running:
     elif int(choice) == 1:
         player.choose_magic()
         magic_choice = int(input("Choose magic"))
+
         spell = player.magic[magic_choice]
         magic_dmg = spell.generate_damage()
 
@@ -46,8 +47,14 @@ while running:
             continue
 
         player.reduce_mp(spell.cost)
-        enemy.take_damage(magic_dmg)
-        print(bcolors.OKBLUE + "\n" + spell.name + "deals", str(magic_dmg), "points of damage" + bcolors.ENDC)
+
+        if spell.type == "white":
+            player.heal(magic_dmg)
+            print(bcolors.OKBLUE + "\n" + spell.name + "heals for", str(magic_dmg), "HP" + bcolors.ENDC)
+
+        elif spell.type == "black":
+            enemy.take_damage(magic_dmg)
+            print(bcolors.OKBLUE + "\n" + spell.name + "deals", str(magic_dmg), "points of damage" + bcolors.ENDC)
 
     enemy_choice = 0
 
