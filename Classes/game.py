@@ -12,8 +12,9 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+
 class Person:
-    def __init__(self, hp, mp, atk, df, magic, items):
+    def __init__(self, name, hp, mp, atk, df, magic, items):
         self.maxhp = hp
         self.hp = hp
         self.maxmp = mp
@@ -21,9 +22,10 @@ class Person:
         self.atkl = atk - 10
         self.atkh = atk + 10
         self.df = df
-        self.magic = magic #assigned in main class
+        self.magic = magic  # assigned in main class
         self.items = items
         self.actions = ["Attack", "Magic", "Items"]
+        self.name = name
 
     def generate_damage(self):
         return random.randrange(self.atkl, self.atkh)
@@ -56,39 +58,31 @@ class Person:
 
     def choose_action(self):
         i = 0
-        print("\n" + bcolors.OKBLUE + bcolors.BOLD + "ACTIONS: " + bcolors.ENDC)
+        print("\n" + "   " + bcolors.BOLD + self.name + bcolors.ENDC)
+        print(bcolors.OKBLUE + bcolors.BOLD + "   ACTIONS: " + bcolors.ENDC)
         for item in self.actions:
-            print("    " + str(i) + ".", item)
+            print("        " + str(i) + ".", item)
             i += 1
 
     def choose_magic(self):
         i = 0
-        print("\n" + bcolors.OKBLUE + bcolors.BOLD + "MAGIC: " + bcolors.ENDC)
+        print("\n" + bcolors.OKBLUE + bcolors.BOLD + "   MAGIC: " + bcolors.ENDC)
         for spell in self.magic:
-            print("    " + str(i) + ".", spell.name, "(cost:", str(spell.cost) + ")")
+            print("        " + str(i) + ".", spell.name, "(cost:", str(spell.cost) + ")")
             i += 1
 
     def choose_item(self):
         i = 0
 
-        print("\n" + bcolors.OKGREEN + bcolors.BOLD + "ITEMS: " + bcolors.ENDC)
+        print("\n" + bcolors.OKGREEN + bcolors.BOLD + "   ITEMS: " + bcolors.ENDC)
         for item in self.items:
-            print("    " + str(i) + ".", item["item"].name + ":", item["item"].description, " (x" + str(item["quantity"]) + ")")
+            print("        " + str(i) + ".", item["item"].name + ":", item["item"].description,
+                  " (x" + str(item["quantity"]) + ")")
             i += 1
 
-'''
-    def generate_spell_damage(self, i): #i is the index for array in magic
-        mgl = self.magic[i]["dmg"] - 5
-        mgh = self.magic[i]["dmg"] + 5
-        return random.randrange(mgl, mgh)
-
-
-     
-            # print(self.magic)
-       # for i in self.magic:
-       #     print(i)
-       # return False
-       # print(bcolors.OKBLUE + bcolors.BOLD + "Magic" + bcolors.ENDC)
-
-
-'''
+    def get_stats(self):
+        print("                          ____________________                _____________ ")
+        print(bcolors.BOLD + self.name + "     " + str(self.hp) + "/" + str(self.maxhp) + "   |" +
+              bcolors.OKGREEN + "████████████        " + bcolors.ENDC + bcolors.BOLD + "|     " +
+              str(self.mp) + "/" + str(self.maxmp) + "    |" + bcolors.OKBLUE + "█████████████" +
+              bcolors.ENDC + "|")
