@@ -3,20 +3,20 @@ from Classes.magic import Spell
 from Classes.inventory import Item
 
 # Create black magic
-fire = Spell("Fire", 10, 100, "black")
-thunder = Spell("Thunder", 10, 100, "black")
-blizzard = Spell("Blizzard", 10, 100, "black")
-meteor = Spell("Meteor", 20, 200, "black")
+fire = Spell("Fire", 25, 600, "black")
+thunder = Spell("Thunder", 25, 600, "black")
+blizzard = Spell("Blizzard", 25, 600, "black")
+meteor = Spell("Meteor", 40, 1200, "black")
 quake = Spell("Quake", 14, 140, "black")
 
 # Create white magic
-cure = Spell("Cure", 12, 120, "White")
-cura = Spell("Cura", 18, 200, "White")
+cure = Spell("Cure", 25, 620, "White")
+cura = Spell("Cura", 32, 1500, "White")
 
 # Create some items
 potion = Item("Potion", "potion", "Heals 50 HP", 50)
 hipotion = Item("Hi-Potion", "potion", "Heals 100 HP", 100)
-superpotion = Item("Super Potion", "potion", "Heals 500 HP", 500)
+superpotion = Item("Super Potion", "potion", "Heals 1000 HP", 1000)
 elixer = Item("Elixir", "elixir", "Fully restores HP/MP of one party member ", 9999)
 hielixer = Item("Mega Elixir", "elixir", "Fully restores HP/MP ", 9999)
 
@@ -28,10 +28,10 @@ player_items = [{"item": potion, "quantity": 15}, {"item": hipotion, "quantity":
                 {"item": hielixer, "quantity": 2}, {"item": grenade, "quantity": 15}]
 
 # Initiate people
-player1 = Person("Mighty: ", 3260, 65, 60, 34, player_spells, player_items)
-player2 = Person("Alpha : ", 4160, 65, 60, 34, player_spells, player_items)
-player3 = Person("Ranger: ", 3089, 65, 60, 34, player_spells, player_items)
-enemy = Person("Dark: ", 1200, 65, 45, 25, [], [])
+player1 = Person("Mighty: ", 3260, 132, 300, 34, player_spells, player_items)
+player2 = Person("Alpha : ", 4160, 188, 311, 34, player_spells, player_items)
+player3 = Person("Ranger: ", 3089, 174, 288, 34, player_spells, player_items)
+enemy = Person("Dark: ", 11200, 701, 525, 25, [], [])
 
 players = [player1, player2, player3]
 
@@ -44,7 +44,7 @@ while running:
     print("==================")
 
     print("\n\n")
-    print("NAME                      HP                        MP")
+    print("NAME                       HP                                         MP")
     for player in players:
         player.get_stats()
 
@@ -126,6 +126,6 @@ while running:
         print(bcolors.OKGREEN + bcolors.BOLD + "You have WON!!" + bcolors.ENDC)
         running = False
 
-    elif player1.get_hp() == 0:
+    elif player.get_hp() == 0:
         print(bcolors.FAIL + bcolors.BOLD + "You have been defeated :(" + bcolors.ENDC)
         running = False
